@@ -20,6 +20,14 @@ jobs:
           echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           export COMMIT="$(git rev-parse --short HEAD)"
           echo $COMMIT
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo dkp-pacman -Syu --noconfirm
+          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
+          makepkg -si --noconfirm
+          cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
+          makepkg -si --noconfirm
+          cd $GITHUB_WORKSPACE
           chmod +x ./build.sh
           ./build.sh
 
