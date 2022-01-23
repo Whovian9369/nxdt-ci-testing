@@ -24,6 +24,7 @@ jobs:
           sudo apt-get upgrade -y
           sudo dkp-pacman -Syu --noconfirm
           echo "Pacman itself is done, moving onto makepkg"
+          echo "Onto liblwext4"
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           dkp-makepkg -si --noconfirm
           echo "liblwext4 is done, moving onto libntfs-3g"
