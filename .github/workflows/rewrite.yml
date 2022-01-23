@@ -23,10 +23,13 @@ jobs:
           sudo apt-get update
           sudo apt-get upgrade -y
           sudo dkp-pacman -Syu --noconfirm
+          echo "Pacman itself is done, moving onto makepkg"
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           dkp-makepkg -si --noconfirm
+          echo "liblwext4 is done, moving onto libntfs-3g"
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
           dkp-makepkg -si --noconfirm
+          echo "liblwext4 is done, moving onto NXDT itself."
           cd $GITHUB_WORKSPACE
           chmod +x ./build.sh
           ./build.sh
