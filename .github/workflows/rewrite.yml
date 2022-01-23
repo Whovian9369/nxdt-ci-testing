@@ -25,32 +25,31 @@ jobs:
           alias dkp-makepkg=makepkg
           chmod 777 -R $GITHUB_WORKSPACE
 
-#      - name: useradd to try and force makepkg to work
-#        run: |
-#          useradd nxdt-build
-#          sudo su - nxdt-build
+      - name: useradd to try and force makepkg to work
+        run: |
+          useradd nxdt-build
+          sudo su - nxdt-build
 
-#      - name: Building libusbhsfs - liblwext4...
-#        run: |
-#          whoami
-#          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
-#          sudo chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
-##          dkp-makepkg -si --noconfirm
-
+      - name: Building libusbhsfs - liblwext4...
+        run: |
+          whoami
+          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
+          sudo -n chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
+          dkp-makepkg -si --noconfirm
       - name: Building libusbhsfs - libntfs-3g...
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
-#          chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
+          sudo -n chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
           dkp-makepkg -si --noconfirm
 
-#      - name: Building nxdumptool...
-#        run: |
-#          echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-#          export COMMIT="$(git rev-parse --short HEAD)"
-#          echo $COMMIT
-#          cd $GITHUB_WORKSPACE
-#          chmod +x ./build.sh
-#          ./build.sh
+      - name: Building nxdumptool...
+        run: |
+          echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          export COMMIT="$(git rev-parse --short HEAD)"
+          echo $COMMIT
+          cd $GITHUB_WORKSPACE
+          chmod +x ./build.sh
+          ./build.sh
 
       - uses: actions/upload-artifact@v2
         with:
