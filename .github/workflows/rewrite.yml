@@ -34,7 +34,7 @@ jobs:
         run: |
           whoami
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
-          sudo -n chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
+          sudo chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
 #          dkp-makepkg -si --noconfirm
 
       - name: Building libusbhsfs - libntfs-3g...
