@@ -35,6 +35,7 @@ jobs:
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           sudo -n chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
           sudo -u nxdt-build -n echo "I am $(whoami)"
+          sudo dkp-pacman -S dkp-toolchain-vars
           sudo -u nxdt-build -n dkp-makepkg -i --noconfirm
 
       - name: Building libusbhsfs - libntfs-3g...
