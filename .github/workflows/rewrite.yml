@@ -19,10 +19,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get upgrade -y
-#          sudo dkp-pacman -Syu --noconfirm
+          alias dkp-makepkg=makepkg
 
       - name: Building libusbhsfs - liblwext4...
         run: |
+          whoami
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           dkp-makepkg -si --noconfirm
 
