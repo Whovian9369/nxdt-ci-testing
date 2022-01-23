@@ -11,6 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: devkitpro/devkita64
+    options: --user nobody
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,13 +27,15 @@ jobs:
           whoami
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
-          sudo -u nobody dkp-makepkg -si --noconfirm
+          dkp-makepkg -s
+          dkp-makepkg -i --noconfirm
 
       - name: Building libusbhsfs - libntfs-3g...
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
           chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
-          sudo -u nobody dkp-makepkg -si --noconfirm
+          sudo -u nobody dkp-makepkg -s
+          dkp-makepkg -i --noconfirm
 
       - name: Building nxdumptool...
         run: |
