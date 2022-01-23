@@ -34,8 +34,8 @@ jobs:
           whoami
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           sudo -n chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
-          sudo -u nxdt-build -ni whoami
-          sudo -u nxdt-build -ni dkp-makepkg -si --noconfirm
+          sudo -u nxdt-build -n whoami
+          sudo -u nxdt-build -n dkp-makepkg -si --noconfirm
 
       - name: Building libusbhsfs - libntfs-3g...
         run: |
