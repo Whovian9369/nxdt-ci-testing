@@ -1,0 +1,30 @@
+name: Build nxdumptool `main` tests
+
+on:
+  push:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkita64
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Building legacy nxdumptool...
+        run: |
+          # Set environment variable holding commit ID for later
+          echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          export COMMIT="$(git rev-parse --short HEAD)"
+          echo $COMMIT
+          make -j$(nproc)
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: nxdt-legacy-${{ env.commit }}
+          path: nxdumptool.nro
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
