@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devkitpro/devkita64
-      options: --user 1001
+#      options: --user 1001
     steps:
       - uses: actions/checkout@v2
         with:
@@ -36,6 +36,7 @@ jobs:
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           sudo -n chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs
           dkp-makepkg -si --noconfirm
+
       - name: Building libusbhsfs - libntfs-3g...
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
