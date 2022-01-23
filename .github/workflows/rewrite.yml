@@ -25,11 +25,13 @@ jobs:
         run: |
           whoami
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
+          chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
           sudo -u nobody dkp-makepkg -si --noconfirm
 
       - name: Building libusbhsfs - libntfs-3g...
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
+          chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
           sudo -u nobody dkp-makepkg -si --noconfirm
 
       - name: Building nxdumptool...
