@@ -12,44 +12,45 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devkitpro/devkita64
-      options: --user nobody
+      options: --user 1001
     steps:
-      - run: sudo chmod 777 -R $GITHUB_WORKSPACE
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Make user to try and makepkg with
-        run: useradd nxdt-build
-      - name: Updating repos...
-        run: |
-          sudo apt-get update
-          sudo apt-get upgrade -y
-          alias dkp-makepkg=makepkg
-
-      - name: Building libusbhsfs - liblwext4...
-        run: |
-          whoami
-          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
-          chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
-          dkp-makepkg -si --noconfirm
-
-      - name: Building libusbhsfs - libntfs-3g...
-        run: |
-          cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
-          # chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
-          dkp-makepkg -si --noconfirm
-
-      - name: Building nxdumptool...
-        run: |
-          echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          export COMMIT="$(git rev-parse --short HEAD)"
-          echo $COMMIT
-          cd $GITHUB_WORKSPACE
-          chmod +x ./build.sh
-          ./build.sh
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: nxdt-rewrite-${{ env.commit }}
-          path: \*.7z
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+       - run: whoami
+#      - name: Make user to try and makepkg with
+#        run: useradd nxdt-build
+#      - name: Updating repos...
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get upgrade -y
+#          alias dkp-makepkg=makepkg
+#          chmod 777 -R $GITHUB_WORKSPACE
+#
+#      - name: Building libusbhsfs - liblwext4...
+#        run: |
+#          whoami
+#          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
+#          chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
+#          sudo -u nxdt-build dkp-makepkg -si --noconfirm
+#
+#      - name: Building libusbhsfs - libntfs-3g...
+#        run: |
+#          cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
+#          # chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
+#          dkp-makepkg -si --noconfirm
+#
+#      - name: Building nxdumptool...
+#        run: |
+#          echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+#          export COMMIT="$(git rev-parse --short HEAD)"
+#          echo $COMMIT
+#          cd $GITHUB_WORKSPACE
+#          chmod +x ./build.sh
+#          ./build.sh
+#
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: nxdt-rewrite-${{ env.commit }}
+#          path: \*.7z
+#          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
