@@ -14,9 +14,12 @@ jobs:
       image: devkitpro/devkita64
       options: --user nobody
     steps:
+      - run: chmod 777 -R $GITHUB_WORKSPACE
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: Make user to try and makepkg with
+        run: useradd nxdt-build
       - name: Updating repos...
         run: |
           sudo apt-get update
@@ -27,7 +30,7 @@ jobs:
         run: |
           whoami
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
-          # chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
+          chmod 777 -R $GITHUB_WORKSPACE/libs/libusbhsfs/
           dkp-makepkg -si --noconfirm
 
       - name: Building libusbhsfs - libntfs-3g...
