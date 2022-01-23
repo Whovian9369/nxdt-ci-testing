@@ -15,22 +15,27 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Building rewrite nxdumptool...
+      - name: Updating repos...
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo dkp-pacman -Syu --noconfirm
+
+      - name: Building libusbhsfs - liblwext4...
+        run: |
+          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
+          dkp-makepkg -si --noconfirm
+
+      - name: Building libusbhsfs - libntfs-3g...
+        run: |
+          cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
+          dkp-makepkg -si --noconfirm
+
+      - name: Building nxdumptool...
         run: |
           echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           export COMMIT="$(git rev-parse --short HEAD)"
           echo $COMMIT
-          sudo apt-get update
-          sudo apt-get upgrade -y
-          sudo dkp-pacman -Syu --noconfirm
-          echo "Pacman itself is done, moving onto makepkg"
-          echo "Onto liblwext4"
-          cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
-          dkp-makepkg -si --noconfirm
-          echo "liblwext4 is done, moving onto libntfs-3g"
-          cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
-          dkp-makepkg -si --noconfirm
-          echo "liblwext4 is done, moving onto NXDT itself."
           cd $GITHUB_WORKSPACE
           chmod +x ./build.sh
           ./build.sh
