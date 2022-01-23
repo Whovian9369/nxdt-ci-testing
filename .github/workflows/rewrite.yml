@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-       - run: whoami
+      - run: whoami
 #      - name: Make user to try and makepkg with
 #        run: useradd nxdt-build
 #      - name: Updating repos...
