@@ -49,11 +49,11 @@ jobs:
           sudo dkp-pacman -U switch-libntfs-3g*.tar.xz --noconfirm
           # Install the generated package
 
-#      - name: Building nxdumptool...
-#        run: |
-#          cd $GITHUB_WORKSPACE
-#          ./build.sh
-#          ls nxdumptool-rewrite_poc_$COMMIT.7z nxdumptool-rewrite_poc_$COMMIT-Debug_ELFs.7z
+      - name: Building nxdumptool...
+        run: |
+          cd $GITHUB_WORKSPACE
+          ./build.sh
+          ls nxdumptool-rewrite_poc_$COMMIT.7z nxdumptool-rewrite_poc_$COMMIT-Debug_ELFs.7z
 
 #      - name: nxdumptool rewrite (NRO)
 #      - uses: actions/upload-artifact@v2
