@@ -51,3 +51,4 @@ rm -rf ./code_templates/tmp
 mv ./main.cpp ./source/main.cpp
 
 # read -p "Press any key to finish ..."
+# Does disabling the `read` line fix the "Error" of success?
