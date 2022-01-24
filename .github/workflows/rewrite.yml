@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - 
 
       - name: Updating repos and install dkp-toolchain-vars...
         run: |
