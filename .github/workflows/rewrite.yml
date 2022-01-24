@@ -29,7 +29,8 @@ jobs:
 
       - name: Double check variables to make sure everything's properly set.
         run: |
-          export COMMIT="$(git rev-parse --short HEAD)" ; echo commit="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          cd $GITHUB_WORKSPACE ; export COMMIT="$(git rev-parse --short HEAD)"
+          echo commit="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           # Set our commit ID into environment variables (for the actual build env and for Github Actions) to make stuff easier later
 
       - name: Building libusbhsfs - liblwext4...
@@ -51,7 +52,8 @@ jobs:
       - name: Building nxdumptool...
         run: |
           cd $GITHUB_WORKSPACE
-          ./build.sh
+          # ./build.sh
+          touch nxdumptool-rewrite_poc_"$COMMIT".7z nxdumptool-rewrite_poc_"$COMMIT"-Debug_ELFs.7z
           ls nxdumptool-rewrite_poc_$COMMIT.7z nxdumptool-rewrite_poc_$COMMIT-Debug_ELFs.7z
 
 #      - name: nxdumptool rewrite (NRO)
