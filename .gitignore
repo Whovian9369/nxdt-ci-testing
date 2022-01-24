@@ -18,3 +18,5 @@ host/nxdumptool
 *.exe
 main.cpp
 /code_templates/tmp/*
+.github/workflows/bad-rewrite.yml
+.github/workflows/good-rewrite.yml
