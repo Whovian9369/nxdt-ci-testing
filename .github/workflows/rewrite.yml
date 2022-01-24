@@ -27,6 +27,7 @@ jobs:
       - name: Double check variables to make sure everything's properly set.
         run: |
           export COMMIT="$(git rev-parse --short HEAD)" DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM DEVKITPPC=/opt/devkitpro/devkitPPC
+          echo commit="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo $COMMIT $DEVKITPRO $DEVKITARM $DEVKITPPC
 
       - name: useradd to try and force makepkg to work
@@ -52,9 +53,15 @@ jobs:
           cd $GITHUB_WORKSPACE
           chmod +x ./build.sh
           ./build.sh
+          ls nxdumptool-rewrite_poc_$COMMIT.7z nxdumptool-rewrite_poc_$COMMIT-Debug_ELFs.7z
 
       - uses: actions/upload-artifact@v2
         with:
-          name: nxdt-rewrite-${{ env.commit }}
-          path: \*.7z
+          name: nxdt-rewrite-poc-${{ env.commit }}-nro
+          path: nxdumptool-rewrite_poc_${{ env.commit }}.7z
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+
+        with:
+          name: nxdt-rewrite-poc-${{ env.commit }}-Debug_ELFs
+          path: nxdumptool-rewrite_poc_${{ env.commit }}-Debug_ELFs.7z
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`

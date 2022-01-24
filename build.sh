@@ -1,5 +1,6 @@
 #!/bin/bash
 cd "$(dirname "${BASH_SOURCE[0]}")"
+set -x
 
 archive_filename="nxdumptool-rewrite_poc_$(git rev-parse --short HEAD)"
 
@@ -49,4 +50,4 @@ rm -f ./source/main.c
 rm -rf ./code_templates/tmp
 mv ./main.cpp ./source/main.cpp
 
-read -p "Press any key to finish ..."
+# read -p "Press any key to finish ..."
