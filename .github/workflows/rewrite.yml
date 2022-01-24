@@ -43,11 +43,10 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           ./build.sh
-# ls nxdumptool-rewrite_poc_$COMMIT.7z nxdumptool-rewrite_poc_$COMMIT-Debug_ELFs.7z
 
-       - name: Upload nxdumptool rewrite (NRO)
+       - name: "Upload nxdumptool rewrite (NRO)"
        - uses: actions/upload-artifact@v2.3.1
          with:
            name: "nxdumptool rewrite (NRO) - ${{ env.commit }}"
-           path: nxdumptool-rewrite_poc_${{ env.commit }}.7z
-           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to 'warn'
+           path: "nxdumptool-rewrite_poc_${{ env.commit }}.7z"
+           if-no-files-found: error
