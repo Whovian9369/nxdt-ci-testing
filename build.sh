@@ -1,6 +1,5 @@
 #!/bin/bash
 cd "$(dirname "${BASH_SOURCE[0]}")"
-set -x
 
 archive_filename="nxdumptool-rewrite_poc_$(git rev-parse --short HEAD)"
 
@@ -47,8 +46,7 @@ cd ./code_templates/tmp
 
 cd ../..
 rm -f ./source/main.c
-rm -rf ./code_templates/tmp
+# rm -rf ./code_templates/tmp
 mv ./main.cpp ./source/main.cpp
 
 # read -p "Press any key to finish ..."
-# Does disabling the `read` line fix the "Error" of success?
