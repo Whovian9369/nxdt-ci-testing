@@ -1,4 +1,4 @@
-name: NXDT_Rewrite_Tests
+name: Build nxdumptool 'rewrite' tests
 
 on:
   push:
@@ -55,16 +55,3 @@ jobs:
           name: nxdumptool rewrite - (Debug ELF) - ${{ env.commit }}.7z
           path: nxdumptool-rewrite_poc_${{ env.commit }}-Debug_ELFs.7z
           if-no-files-found: error
-
-      - uses: actions/upload-artifact@v2.3.1
-        with:
-          name: nxdumptool rewrite (NRO) - ${{ env.commit }} - Zipped by GH.zip
-          path: code_templates/tmp/*/*.nro
-          if-no-files-found: error
-
-      - uses: actions/upload-artifact@v2.3.1
-        with:
-          name: nxdumptool rewrite - (Debug ELF) - ${{ env.commit }} - Zipped by GH.zip
-          path: code_templates/tmp/*/*.elf
-          if-no-files-found: error
-
