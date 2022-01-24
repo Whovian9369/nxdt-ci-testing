@@ -1,11 +1,11 @@
-name: Build nxdumptool `main` tests
+name: Build nxdumptool 'main' tests
 
 on:
   push:
     branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch: [ main rewrite ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,10 +17,7 @@ jobs:
           submodules: recursive
       - name: Building legacy nxdumptool...
         run: |
-          # Set environment variable holding commit ID for later
           echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          export COMMIT="$(git rev-parse --short HEAD)"
-          echo $COMMIT
           make -j$(nproc)
 
       - uses: actions/upload-artifact@v2
