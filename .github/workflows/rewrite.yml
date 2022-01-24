@@ -20,7 +20,7 @@ jobs:
       - name: Updating repos and install dkp-toolchain-vars...
         run: |
           sudo apt-get update
-          sudo apt-get upgrade -y patch fakeroot
+          sudo apt-get upgrade -y patch fakeroot p7zip-full
           chmod 777 -R $GITHUB_WORKSPACE
           sudo -n dkp-pacman --noconfirm -U $GITHUB_WORKSPACE/libs/dkp-toolchain-vars/dkp-toolchain-vars-1.0.0-2-any.pkg.tar.xz
 
