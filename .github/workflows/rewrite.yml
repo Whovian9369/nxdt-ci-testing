@@ -26,7 +26,7 @@ jobs:
 
       - name: Double check variables to make sure everything's properly set.
         run: |
-          echo "COMMIT="$(git rev-parse --short HEAD)"\nDEVKITPRO=/opt/devkitpro\nDEVKITARM=/opt/devkitpro/devkitARM\nDEVKITPPC=/opt/devkitpro/devkitPPC" >> $GITHUB_ENV
+          export COMMIT="$(git rev-parse --short HEAD)" DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM DEVKITPPC=/opt/devkitpro/devkitPPC
           echo $COMMIT $DEVKITPRO $DEVKITARM $DEVKITPPC
 
       - name: useradd to try and force makepkg to work
