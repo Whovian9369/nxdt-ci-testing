@@ -26,7 +26,8 @@ jobs:
       - name: Double check variables to make sure everything's properly set.
         run: |
           export COMMIT="$(git rev-parse --short HEAD)" ; echo commit="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
+          echo $COMMIT
+          echo ${{ env.commit }}
       - name: Building libusbhsfs - liblwext4...
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
@@ -46,6 +47,12 @@ jobs:
 
       - uses: actions/upload-artifact@v2.3.1
         with:
-          name: "nxdumptool rewrite (NRO) - ${{ env.commit }}"
-          path: "nxdumptool-rewrite_poc_${{ env.commit }}.7z"
+          name: nxdumptool rewrite (NRO) - ${{ env.commit }}.7z
+          path: nxdumptool-rewrite_poc_${{ env.commit }}.7z
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v2.3.1
+        with:
+          name: nxdumptool rewrite - (Debug ELF) - ${{ env.commit }}.7z
+          path: nxdumptool-rewrite_poc_${{ env.commit }}-Debug_ELFs.7z
           if-no-files-found: error
