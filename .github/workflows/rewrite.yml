@@ -66,4 +66,4 @@ jobs:
         with:
           name: nxdumptool rewrite (Debug ELFs) - ${{ env.commit }}
           path: nxdumptool-rewrite_poc_${{ env.commit }}-Debug_ELFs.7z
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to warn
