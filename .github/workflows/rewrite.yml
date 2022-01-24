@@ -1,4 +1,4 @@
-name: Build nxdumptool 'rewrite' tests
+name: NXDT_Rewrite_Tests
 
 on:
   push:
