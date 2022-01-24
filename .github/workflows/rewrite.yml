@@ -1,4 +1,4 @@
-name: Build nxdumptool `rewrite` tests
+name: Build nxdumptool 'rewrite' tests
 
 on:
   push:
@@ -16,17 +16,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: Updating repos, install dkp-toolchain-vars, and set permissions...
         run: |
           sudo apt-get update ; sudo apt-get upgrade -y patch fakeroot p7zip-full
-# Update repos and install `patch`, `fakeroot`, and `p7zip-full`
+# Update repos and install 'patch', 'fakeroot', and 'p7zip-full'
           sudo -n dkp-pacman --noconfirm -U $GITHUB_WORKSPACE/libs/dkp-toolchain-vars/dkp-toolchain-vars-1.0.0-2-any.pkg.tar.xz
-# Install `dkp-toolchain-vars` as required for building https://github.com/DarkMatterCore/libusbhsfs
+# Install 'dkp-toolchain-vars' as required for building https://github.com/DarkMatterCore/libusbhsfs
           useradd nxdt-build
-# Create `nxdt-build` user for building libusbhsfs
+# Create 'nxdt-build' user for building libusbhsfs
           chmod 777 -R $GITHUB_WORKSPACE
-# Let `nxdt-build` user access repo directory and all its files for building
+# Let 'nxdt-build' user access repo directory and all its files for building
 
       - name: Double check variables to make sure everything's properly set.
         run: |
@@ -37,7 +36,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/liblwext4
           sudo -u nxdt-build -n COMMIT="$(git rev-parse --short HEAD)" DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM DEVKITPPC=/opt/devkitpro/devkitPPC dkp-makepkg
-# Set our environment variables and run `makepkg` so we build this generated package for install, as prerequisite for app itself
+# Set our environment variables and run 'makepkg' so we build this generated package for install, as prerequisite for app itself
           sudo dkp-pacman -U switch-lwext4*.tar.xz --noconfirm
 # Install the generated package
 
@@ -45,7 +44,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/libs/libusbhsfs/libntfs-3g
           sudo -u nxdt-build -n COMMIT="$(git rev-parse --short HEAD)" DEVKITPRO=/opt/devkitpro DEVKITARM=/opt/devkitpro/devkitARM DEVKITPPC=/opt/devkitpro/devkitPPC dkp-makepkg
-# Set our environment variables and run `makepkg` so we build this generated package for install, as prerequisite for app itself
+# Set our environment variables and run 'makepkg' so we build this generated package for install, as prerequisite for app itself
           sudo dkp-pacman -U switch-libntfs-3g*.tar.xz --noconfirm
 # Install the generated package
 
@@ -60,11 +59,11 @@ jobs:
         with:
           name: nxdumptool rewrite (NRO) - ${{ env.commit }}
           path: nxdumptool-rewrite_poc_${{ env.commit }}.7z
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to 'warn'
 
       - name: nxdumptool rewrite (Debug ELFs)
       - uses: actions/upload-artifact@v2
         with:
           name: nxdumptool rewrite (Debug ELFs) - ${{ env.commit }}
           path: nxdumptool-rewrite_poc_${{ env.commit }}-Debug_ELFs.7z
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to warn
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to 'warn'
