@@ -55,7 +55,7 @@ jobs:
           ./build.sh
           ls nxdumptool-rewrite_poc_$COMMIT.7z nxdumptool-rewrite_poc_$COMMIT-Debug_ELFs.7z
 
-      - name: 
+      - name: nxdumptool rewrite (NRO)
       - uses: actions/upload-artifact@v2
         with:
           name: nxdumptool rewrite (NRO) - ${{ env.commit }}
