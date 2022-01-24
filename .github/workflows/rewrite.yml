@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devkitpro/devkita64
-#      options: --user 1001
     steps:
       - uses: actions/checkout@v2
         with:
@@ -24,7 +23,6 @@ jobs:
           alias dkp-makepkg=makepkg
           chmod 777 -R $GITHUB_WORKSPACE
           sudo dkp-pacman --noconfirm -U $GITHUB_WORKSPACE/libs/dkp-toolchain-vars/dkp-toolchain-vars-1.0.0-2-any.pkg.tar.xz
-
 
       - name: useradd to try and force makepkg to work
         run: |
@@ -45,6 +43,7 @@ jobs:
       - name: Building nxdumptool...
         run: |
           echo "commit=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "DEVKITPRO=/opt/devkitpro\nDEVKITARM=/opt/devkitpro/devkitARM\nDEVKITPPC=/opt/devkitpro/devkitPPC" >> $GITHUB_ENV
           export COMMIT="$(git rev-parse --short HEAD)"
           echo $COMMIT
           cd $GITHUB_WORKSPACE
