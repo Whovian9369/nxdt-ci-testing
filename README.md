@@ -2,6 +2,13 @@
 <img width="200" src="icon.jpg">
 Nintendo Switch Dump Tool
 
+# This repo was made and used to test the ability to have nxdumptool automatically built whenever new commits are uploaded to the repository. 
+# This repo is in **no way** official, and I would point you instead to [the official repository](https://github.com/DarkMatterCore/nxdumptool)
+# Thank you for your time!
+
+------------------
+
+
 ## The application is being rewritten from scratch to improve things such as code quality, maintainability and readability.
 
 ## All the changes will be pushed to this branch once the new codebase reaches an usable + stable state. Sorry for any possible inconveniences.
